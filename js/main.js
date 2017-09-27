@@ -1,21 +1,21 @@
 // array of selectable cards
 var cards = [
-	{
+	{	
 		rank: "queen",
 		suit: "hearts",
 		cardImage: "images/queen-of-hearts.png"
 	},
-	{
+	{	
 		rank: "queen",
 		suit: "diamonds",
 		cardImage: "images/queen-of-diamonds.png"
 	},
-	{
+	{	
 		rank: "king",
 		suit: "hearts",
 		cardImage: "images/king-of-hearts.png"
 	},
-	{
+	{	
 		rank: "king",
 		suit: "diamonds",
 		cardImage: "images/king-of-diamonds.png"
@@ -84,6 +84,20 @@ var resetDeck = function () {
 		cardElement.setAttribute("src", "images/back.png");
 	};
 	cardsInPlay = [];
+	// calls function to shuffle cards
+	shuffle(cards);
+};
+
+// shuffle cards 
+function shuffle(sourceArray) {
+    for (var i = 0; i < sourceArray.length - 1; i++) {
+        var j = i + Math.floor(Math.random() * (sourceArray.length - i));
+
+        var temp = sourceArray[j];
+        sourceArray[j] = sourceArray[i];
+        sourceArray[i] = temp;
+    };
+	return sourceArray;
 };
 
 resetButton.addEventListener("click", resetDeck);
