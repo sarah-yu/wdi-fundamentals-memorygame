@@ -37,19 +37,25 @@ var checkForMatch = function () {
 
 // flip the selected card and push it into cardsInPlay[]
 var flipCard = function () {
-	var cardId = this.getAttribute("data-id");
-	this.setAttribute("src", cards[cardId].cardImage);
-	cardsInPlay.push(cards[cardId].rank);
+	// check if card has already been selected
+	if (this.getAttribute("src") !== "images/back.png") {
+		alert("You already chose this card!");
+	} else {
+		var cardId = this.getAttribute("data-id");
+		this.setAttribute("src", cards[cardId].cardImage);
 
-	// if two cards have been selected, run checkForMatch()
-	if (cardsInPlay.length === 2) {
-		checkForMatch();
+		cardsInPlay.push(cards[cardId].rank);
+
+		// if two cards have been selected, run checkForMatch()
+		if (cardsInPlay.length === 2) {
+			checkForMatch();
+		};
+
+		// console messages to check if everything is working 
+		/* console.log("User flipped " + cards[cardId].rank + ".");
+		console.log(cards[cardId].cardImage);
+		console.log(cards[cardId].suit); */
 	};
-
-	// console messages to check if everything is working 
-	console.log("User flipped " + cards[cardId].rank + ".");
-	console.log(cards[cardId].cardImage);
-	console.log(cards[cardId].suit);
 };
 
 // create game board with selectable cards
@@ -71,6 +77,7 @@ var resetGame = function () {
 		var cardElement = document.getElementsByTagName("img")[i];
 		cardElement.setAttribute("src", "images/back.png");
 	};
+	cardsInPlay = [];
 };
 
 resetButton.addEventListener("click", resetGame);
