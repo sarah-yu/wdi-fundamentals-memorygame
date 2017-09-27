@@ -25,10 +25,16 @@ var cards = [
 // array of cards selected by user
 var cardsInPlay = [];
 
+// variable to hold user score
+var score = 0;
+var displayScore = document.getElementById('user-score');
+
 // check for match between cards selected
 var checkForMatch = function () {
 	if (cardsInPlay[0] === cardsInPlay[1]) {
 			alert("You found a match!");
+			score = score + 1;
+			displayScore.textContent = score;
 	} else {
 			alert("Sorry, try again");
 	};
@@ -72,7 +78,7 @@ var createBoard = function () {
 // when user clicks button, reset game board
 var resetButton = document.getElementsByTagName("button")[0];
 
-var resetGame = function () {
+var resetDeck = function () {
 	for (var i = 0; i < cards.length; i++) {
 		var cardElement = document.getElementsByTagName("img")[i];
 		cardElement.setAttribute("src", "images/back.png");
@@ -80,6 +86,6 @@ var resetGame = function () {
 	cardsInPlay = [];
 };
 
-resetButton.addEventListener("click", resetGame);
+resetButton.addEventListener("click", resetDeck);
 
 createBoard();
