@@ -26,16 +26,17 @@ var cards = [
 var cardsInPlay = [];
 
 // check for match between cards selected
-var checkForMatch = function() {
+var checkForMatch = function () {
 	if (cardsInPlay[0] === cardsInPlay[1]) {
 			alert("You found a match!");
 	} else {
 			alert("Sorry, try again");
 	};
+	cardsInPlay = [];
 };
 
 // flip the selected card and push it into cardsInPlay[]
-var flipCard = function() {
+var flipCard = function () {
 	var cardId = this.getAttribute("data-id");
 	this.setAttribute("src", cards[cardId].cardImage);
 	cardsInPlay.push(cards[cardId].rank);
@@ -52,7 +53,7 @@ var flipCard = function() {
 };
 
 // create game board with selectable cards
-var createBoard = function() {
+var createBoard = function () {
 	for (var i = 0; i < cards.length; i++) {
 		var cardElement = document.createElement("img");
 		cardElement.setAttribute("src", "images/back.png");
@@ -62,5 +63,16 @@ var createBoard = function() {
 	};
 };
 
-createBoard();
+// when user clicks button, reset game board
+var resetButton = document.getElementsByTagName("button")[0];
 
+var resetGame = function () {
+	for (var i = 0; i < cards.length; i++) {
+		var cardElement = document.getElementsByTagName("img")[i];
+		cardElement.setAttribute("src", "images/back.png");
+	};
+};
+
+resetButton.addEventListener("click", resetGame);
+
+createBoard();
