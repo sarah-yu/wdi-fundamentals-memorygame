@@ -75,19 +75,6 @@ var createBoard = function () {
 	};
 };
 
-// when user clicks button, reset game board
-var resetButton = document.getElementsByTagName("button")[0];
-
-var resetDeck = function () {
-	for (var i = 0; i < cards.length; i++) {
-		var cardElement = document.getElementsByTagName("img")[i];
-		cardElement.setAttribute("src", "images/back.png");
-	};
-	cardsInPlay = [];
-	// calls function to shuffle cards
-	shuffle(cards);
-};
-
 // shuffle cards 
 function shuffle(sourceArray) {
     for (var i = 0; i < sourceArray.length - 1; i++) {
@@ -98,6 +85,19 @@ function shuffle(sourceArray) {
         sourceArray[i] = temp;
     };
 	return sourceArray;
+};
+
+// when user clicks button, reset game board
+var resetButton = document.getElementsByTagName("button")[0];
+
+var resetDeck = function () {
+	for (var i = 0; i < cards.length; i++) {
+		var cardElement = document.getElementsByTagName("img")[i];
+		cardElement.setAttribute("src", "images/back.png");
+	};
+	cardsInPlay = [];
+	// shuffle cards when reset button is clicked
+	shuffle(cards);
 };
 
 resetButton.addEventListener("click", resetDeck);
